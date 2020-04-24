@@ -1,0 +1,96 @@
+<html lang="zh-CN">
+  <head>
+    <title>let's talk</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/web-socket-js/1.0.0/web_socket.min.js"
+    ></script>
+    <style>
+      input {
+        height: 36px;
+        padding: 6px;
+        width: 240px;
+      }
+
+      .talk {
+        width: 240px;
+        height: 360px;
+        padding: 6px;
+        border: 1px solid orange;
+        box-sizing: border-box;
+        margin-bottom: 8px;
+        overflow-y: scroll;
+      }
+
+      .talk p {
+        margin: 4px 0px;
+      }
+
+      .ctx {
+        float: left;
+        width: 300px;
+      }
+
+      .name {
+        margin-bottom: 8px;
+      }
+
+      .name input {
+        padding: 3px;
+        border-radius: 3px;
+        width: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ctx">
+      <div class="name">
+        <span>no.1</span>
+        <input id="name" placeholder="输入姓名" />
+      </div>
+      <div class="talk"></div>
+      <input id="no2" placeholder="按回车发送" />
+    </div>
+    <script type="text/javascript">
+      //   WEB_SOCKET_SWF_LOCATION = "WebSocketMain.swf";
+      var ws = new WebSocket("ws://127.0.0.1:8686");
+      ws.onopen = function() {
+        // ws.send("Hello"); // Sends a message.
+      };
+
+      function saveMessage(node, msg) {
+        const p = document.createElement("p");
+        p.innerHTML = msg;
+        node.appendChild(p);
+        node.scrollTop = node.scrollHeight;
+      }
+
+      ws.onmessage = function(e) {
+        console.log("recive... :", e.data);
+        saveMessage(talkWin2, e.data);
+      };
+
+      ws.onclose = function() {
+        console.log("closed");
+      };
+
+      const no2 = document.getElementById("no2");
+
+      const talkWin2 = document.getElementsByClassName("talk")[0];
+
+      //   no2.addEventListener("change", function(e) {
+      //     console.log(e.target.value);
+      //   });
+
+      const name = document.getElementById("name");
+
+      no2.addEventListener("keydown", function(e) {
+        if (e.keyCode == 13) {
+          ws.send(`#${name.value}@:${e.target.value}`);
+          no2.value = "";
+        }
+      });
+    </script>
+  </body>
+</html>
