@@ -1,0 +1,14 @@
+.rigid,
+.empty {
+  width: 15px;
+  height: 15px;
+  box-sizing: border-box;
+}
+
+.rigid {
+  background-color: grey;
+}
+
+.inline-block {
+  display: inline-block;
+}

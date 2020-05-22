@@ -1,3 +1,5 @@
+import { initTable } from "src/utils";
+
 export const S = [
   [
     [0, 1, 0, 0],
@@ -102,7 +104,7 @@ export const J = [
     [0, 0, 0, 0]
   ]
 ];
-export const T = [
+export const I = [
   [
     [0, 1, 0, 0],
     [0, 1, 0, 0],
@@ -182,4 +184,6 @@ export const T = [
 ];
 
 // 10*20
-export const WIN = Array(20).fill(Array(10).fill(0));
+export const TABLE = initTable([], 10, 20);
+
+export const BLOCK = [S, Z, L, J, I, O, T];
