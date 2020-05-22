@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-
+import React, { useState, useEffect } from "react";
+import { connect } from "dva";
+import { TABLE } from "src/constants/thing";
 import Table from "@/table";
 
 function request() {
@@ -10,21 +9,27 @@ function request() {
   xhr.send(null);
 }
 
-function App() {
-  const [count, setCount] = useState(0);
+function App(props) {
+  const [table, setTable] = useState(TABLE);
+  useEffect(request, []);
   return (
     <div className="wrap">
       <button
         onClick={() => {
-          request();
-          setCount(count + 1);
+          props.dispatch({
+            type: "table/table",
+            payload: { num: props.data + 1 }
+          });
         }}
       >
-        测试{count}
+        测试
       </button>
-      <Table />
+      <p>{props.data}</p>
+      <Table table={table} />
     </div>
   );
 }
 
-export default App;
+export default connect(({ table }) => ({
+  data: table
+}))(App);

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Block from "@/block";
 import LineBlock from "@/line-block";
-import { TABLE } from "src/constants/thing";
+import styles from "./style.css";
 
-function Table(props = {}) {
+function Table({ table }) {
   return (
-    <div>
-      {TABLE.map((row, index) => {
+    <div className={styles.table}>
+      {table.map((row, index) => {
         return <LineBlock key={String(index)} row={row} />;
       })}
     </div>
