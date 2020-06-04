@@ -1,7 +1,7 @@
 import React from "react";
 import dva from "dva";
 import "./index.css";
-import App from "./App";
+import App from "./app";
 import * as serviceWorker from "./serviceWorker";
 import { modal } from "src/modal";
 

@@ -12,7 +12,42 @@ export function initTable(table, width = 10, heigt = 18) {
   return table;
 }
 
-// 移动方块融合在表格中
-export function canMixed(table, block, i, j) {}
+export function canMixed(table, block, x, y) {
+  for (let row = y; row < block.length + y; row++) {
+    for (let col = x; col < block[0].length + x; col++) {
+      if (
+        block[row - y][col - x] == 1 &&
+        table[row][col] === block[row - y][col - x]
+      ) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
 
-export function canRotate(table, block, i, j) {}
+export function canRotate(table, block, x, y) {}
+
+export function bottomMixed(table, block, x, y) {
+  if (!canMixed(table, block, x, y)) {
+    y -= 1;
+    for (let row = y; row < block.length + y; row++) {
+      for (let col = x; col < block[0].length + x; col++) {
+        if (block[row - y][col - x] == 1) {
+          table[row][col] = 1;
+        }
+      }
+    }
+  }
+}
+
+export function fillTable(table, block, x, y) {
+  for (let row = y; row < block.length + y; row++) {
+    for (let col = x; col < block[0].length + x; col++) {
+      if (block[row - y][col - x] == 1) {
+        table[row][col] = 1;
+      }
+    }
+  }
+  return table;
+}

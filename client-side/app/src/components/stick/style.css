@@ -1,0 +1,18 @@
+.wrap {
+  position: absolute;
+  bottom: 0;
+  height: 20px;
+  width: 100px;
+  background-color: red;
+  z-index: 1;
+}
+
+.tag {
+  color: #fff;
+}
+
+.stick {
+  height: 20px;
+  width: 100px;
+  background-color: cornflowerblue;
+}
